@@ -1,0 +1,1 @@
+<h1>Hello Auth Boiler Plate</h1>
