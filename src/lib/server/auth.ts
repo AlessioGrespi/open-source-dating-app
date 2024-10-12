@@ -1,15 +1,8 @@
 import type{  RequestEvent } from "@sveltejs/kit"
-import { prisma } from "$lib/server/prisma"
 import { writable } from 'svelte/store';
-
-// export const oAuthDataEmail = writable("")
-// export const oAuthDataEmailVerified = writable("")
-// export const oAuthDataProvider = writable("")
-// export const oAuthDataAccessToken = writable("")
-// export const oAuthDataAccessTokenExpiry = writable("")
-// export const oAuthDataRefreshToken = writable("")
-// export const sessionUserID = writable("")
-// export const sessionInfo = writable("")
+import { sessions } from "./db/schema";
+import { db } from "./db/db";
+import { ilike, eq, sql, gt, count } from "drizzle-orm";
 
 export let sessionInfo
 
@@ -37,8 +30,6 @@ export const authenticateUser = async (event: RequestEvent) => {
 
 		const session = await getSession({ sessionToken });
 
-	
-
 		if (session) {
 			// You can use the session object here
 			//console.log("Session found:", session);
@@ -52,11 +43,8 @@ export const authenticateUser = async (event: RequestEvent) => {
 }
 	
 async function getSession({ sessionToken }) {
-    const session = await prisma.session.findFirst({
-        where: {
-            id: sessionToken
-        }
-    });
-    //console.log("Session lookup", session);
+
+    const session = await db.select().from(sessions).where(eq(sessions.id, sessionToken))
+
     return session;
 }

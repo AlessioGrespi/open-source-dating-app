@@ -20,6 +20,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@tailwindcss/typography": "^0.5.14",
+		"@types/bcrypt": "^5.0.2",
 		"@types/eslint": "^9.6.0",
 		"@types/pg": "^8.11.10",
 		"autoprefixer": "^10.4.20",

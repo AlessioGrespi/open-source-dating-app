@@ -1,0 +1,21 @@
+2024-10-12T17:11:48.074Z
+Error: Unsupported database type: unknown
+    at Object.fetchSchemaJson (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\node_modules\@dbml\connector\dist\connectors\connector.js:22:19)
+    at connectionHandler (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\lib\cli\connector.js:24:51)
+    at Object.db2dbml (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\lib\cli\index.js:62:26)
+    at Object.<anonymous> (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\bin\db2dbml.js:4:19)
+    at Module._compile (node:internal/modules/cjs/loader:1376:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1435:10)
+    at Module.load (node:internal/modules/cjs/loader:1207:32)
+    at Module._load (node:internal/modules/cjs/loader:1023:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49
+
+2024-10-12T17:12:30.385Z
+Error: EISDIR: illegal operation on a directory, open 'C:\Users\Alessio\Documents\GitHub\open-source-dating-app\static'
+    at Object.writeFileSync (node:fs:2352:20)
+    at OutputFilePlugin.start (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\lib\cli\outputPlugins\outputFilePlugin.js:16:17)
+    at OutputFilePlugin.write (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\lib\cli\outputPlugins\outputFilePlugin.js:24:29)
+    at connectionHandler (C:\Users\Alessio\AppData\Roaming\npm\node_modules\@dbml\cli\lib\cli\connector.js:30:77)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
