@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ locals, cookies }) => {
 
 	const session = cookies.get('session')
 
-	if (session) {
+	if (session && session !== 'undefined') {
 		console.log('Logged in')
 		throw redirect(303, '/')
 	}
@@ -63,8 +63,9 @@ export const actions: Actions = {
 			console.log("date:", date)
 
 			try {
-				const [sessionData] = await db.select().from(sessions).where(and(eq(sessions.userId, user.id), gt(sessions.expiry, sql`${new Date().toISOString()}`))).orderBy(desc(sessions.expiry)).limit(1);
+				let [sessionData] = await db.select().from(sessions).where(and(eq(sessions.userId, user.id), gt(sessions.expiry, sql`${new Date().toISOString()}`))).orderBy(desc(sessions.expiry)).limit(1);
 
+				console.log('session', sessionData)
 				date.setDate(date.getDate() + 1);
 				console.log("date + 1:", date);
 
@@ -73,7 +74,7 @@ export const actions: Actions = {
 				if (!sessionData) {
 					console.log("Session not found, creating a new session...");
 
-					let sessionData = await db.insert(sessions).values({
+					[sessionData] = await db.insert(sessions).values({
 						userId: user.id,
 						expiry: dateToDB
 					}).returning();
@@ -83,6 +84,7 @@ export const actions: Actions = {
 					await db.update(sessions).set({ expiry: dateToDB }).where(eq(sessions.id, `${sessionData.id}`));
 					console.log('Session Updated');
 				}
+
 				cookies.set("session", sessionData.id, {
 					path: "/",
 					httpOnly: true,
